@@ -91,11 +91,119 @@ namespace Assignment3OOP
 
         #endregion
 
+        #region Binding Part1
+        // Binding => Reference from parent = Object from child
+
+        // Binding have two main types =>   1.Static Binding     2.Dynamic Binding
+
+
+        // 1.Static Binding 
+        // - occurs at compile time
+        // - Faster execution due to no runtime overhead.
+        // - Provides compile-time type checking, reducing runtime errors.
+        // - Preferred when type information is known at compile time.
+        // - Used in most regular programming scenarios for better performance and type safety.
+
+        // 2. Dynamic Binding 
+        // - occurs at runtime
+        // - More flexible, allowing for scenarios where the type or members are not known at compile time.
+        // - Is generally slower than Static binding.
+        // - Employed in scenarios requiring reflection, such as dynamically loading assemblies or creating instances of types at runtime.
+
+        class TypeA
+        {
+            public int A { get; set; }
+
+            public TypeA(int _A)
+            {
+                A = _A;
+            }
+
+            public void myFunc01()
+            {
+                Console.WriteLine($"Base");
+            }
+
+            public virtual void myFunc02()
+            {
+                Console.WriteLine($"Type A: A => {A}");
+            }
+        }
+
+        class TypeB : TypeA
+        {
+            public int B { get; set; }
+
+            public TypeB(int _A, int _B) : base(_A)
+            {
+                B = _B;
+            }
+
+            public new void myFunc01()
+            {
+                Console.WriteLine($"Child");
+            }
+
+            public override void myFunc02()
+            {
+                Console.WriteLine($"Type B: B => {B}");
+            }
+        }
+
+        class TypeC : TypeB
+        {
+            public int C { get; set; }
+
+            public TypeC(int _A, int _B, int _C) : base(_A, _B)
+            {
+                C = _C;
+            }
+
+            public new void myFunc01()
+            {
+                Console.WriteLine($"Grand Child");
+            }
+
+            public override void myFunc02()
+            {
+                Console.WriteLine($"Type C: C => {C}");
+            }
+        }
+        #endregion
 
 
 
         static void Main(string[] args)
         {
+            #region Binding Part2
+            //TypeA refBase = new TypeB(1, 2);
+            //refBase.A = 1; // valid
+            //refBase.B = 2; // invalid
+
+            //refBase.myFunc01();  // Base [new => Parent]  Static Binding
+
+            //refBase.myFunc02();  // Type B: B => 2 [override => child] Dynamic binding
+
+            //TypeB refChild =  (TypeB)refBase; // Casting not binding => [Unsafe]
+            //// -------------------------------------------------------------------------------
+
+            //TypeA typeA = new TypeC(1, 2, 3);
+            //typeA.A = 1; // Valid
+            //typeA.B = 2; // invalid
+            //typeA.C = 3; // invalid
+
+            //typeA.myFunc01();  // Base [new => Parent]  Static Binding
+            //typeA.myFunc02();  // Type C: C => 3 [override => child] Dynamic binding
+
+
+            //TypeB typeB = new TypeC(1, 2, 3);
+            //typeB.A = 1; // Valid
+            //typeB.B = 2; // Valid
+            //typeB.C = 3; // invalid
+
+            //typeB.myFunc01();  // Base [new => Parent]  Static Binding
+            //typeB.myFunc02();  // Type C: C => 3 [override => child] Dynamic binding 
+            #endregion
 
         }
     }
