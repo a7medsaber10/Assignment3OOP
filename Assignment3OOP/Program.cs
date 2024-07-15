@@ -40,7 +40,37 @@ namespace Assignment3OOP
         // The three methods with same name but different Parameters 
         #endregion
 
+        #region Overriding
+        // Method overriding
+        // - Allows a subclass to provide a specific implementation for a method that is already defined in its base class.
+        // - This is achieved using the (virtual keyword) in the base class method and the (override keyword) in the derived class method.
+        // - The method to be called is determined at runtime based on the object instance.
 
+        public class Animal
+        {
+            public virtual void MakeSound()
+            {
+                Console.WriteLine("Animal sound");
+            }
+        }
+
+        public class Dog : Animal
+        {
+            public override void MakeSound()
+            {
+                Console.WriteLine("hooow hoooww");
+            }
+        }
+
+        public class Cat : Animal
+        {
+            public override void MakeSound()
+            {
+                Console.WriteLine("meow meow");
+            }
+        }
+
+        #endregion
 
 
 
@@ -48,7 +78,12 @@ namespace Assignment3OOP
 
         static void Main(string[] args)
         {
-            
+
+            Animal animal = new Dog();
+            animal.MakeSound(); // hooow hooow
+
+            animal = new Cat();
+            animal.MakeSound(); // meow meow
         }
     }
 }
