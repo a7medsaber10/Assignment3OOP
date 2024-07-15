@@ -171,7 +171,35 @@ namespace Assignment3OOP
         }
         #endregion
 
+        #region Interface
+        // Interface => is a contract that defines a set of methods, properties, events, or indexers without providing implementation.
+        // Default access modifier => public
+        // private not allowed inside interface
 
+        // we can write inside interface:
+        // 1. signature for property
+        // 2. signature for method
+        // 3. Default implemented method
+        interface IMyInterface
+        {
+
+            //1. signature for property
+            public int Age { get; set; }
+
+            //2. signature for method
+            public void myfunc();
+
+            //3. Default implemented method
+            public void print() { Console.WriteLine("Default implemented method"); }
+        }
+
+        class myType : IMyInterface
+        {
+            public int Age { get; set; } // Automatic prop
+
+            public void myfunc() => Console.WriteLine("Hello!");
+        }
+        #endregion
 
         static void Main(string[] args)
         {
